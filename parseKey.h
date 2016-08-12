@@ -2,6 +2,7 @@
 #define PARSEKEY_H
 
 #include <string.h>
+#include <stdint.h>
 
 // Modifiers
 #define MOD_CONTROL_LEFT    (1<<0)
@@ -35,15 +36,12 @@
 #define KEY_LEFT_ARROW      0x50
 #define KEY_RIGHT_ARROW     0x4F
 
-// Typedef
-typedef unsigned char byte;
-
 typedef struct {
-    byte Key;
-    byte Modifier;
+    uint8_t Key;
+    uint8_t Modifier;
 } KeyInfo;
 
-byte ParseModifier(char modifier) {
+uint8_t ParseModifier(uint8_t modifier) {
     switch (modifier) {
         case '^':
             return MOD_CONTROL_LEFT;
@@ -58,7 +56,7 @@ byte ParseModifier(char modifier) {
     }
 }
 
-byte ParseKey(char key) {
+uint8_t ParseKey(uint8_t key) {
     if ('A' <= key && key <= 'Z')
         return KEY_A + (key - 'A');
     if ('a' <= key && key <= 'z')
@@ -68,7 +66,7 @@ byte ParseKey(char key) {
     return 0;
 }
 
-byte ParseLiteralKey(char* key) {
+uint8_t ParseLiteralKey(char* key) {
     if (!strcmp("Enter", key))
         return KEY_ENTER;
     if (!strcmp("Space", key))
@@ -105,7 +103,7 @@ byte ParseLiteralKey(char* key) {
         return KEY_LEFT_ARROW;
     if (!strcmp("Right", key))
         return KEY_RIGHT_ARROW;
-    
+
     return 0;
 }
 
@@ -113,12 +111,12 @@ KeyInfo ParseKeyInfo(char* keyString) {
     KeyInfo keyInfo;
     keyInfo.Key = 0;
     keyInfo.Modifier = 0;
-    byte index;
+    uint8_t index;
 
     for (index = 0; index < strlen(keyString); index++) {
         char keyChar = keyString[index];
-        byte parsedKey = 0;
-        
+        uint8_t parsedKey = 0;
+
         switch (keyChar) {
             case '<':
                 index++;
