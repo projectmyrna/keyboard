@@ -1,5 +1,5 @@
 launcher binary
 *.dylib binary
-keyboard.cpp.hex binary
+keyboard.cpp.hex -diff
 micronucleus binary
 
