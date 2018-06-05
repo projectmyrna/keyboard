@@ -3,7 +3,7 @@
 ## Step 1
 
 ```
-./remap.sh
+./remap.sh input
 ```
 
 ## Step 2
